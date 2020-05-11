@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="sidenav.open ()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <span>News</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="content">
+  <mat-sidenav #sidenav class="sidenav">
+    <mat-list>
+      <mat-list-item class="list-item" *ngFor="let category of keys(categories)"
+        (click)="getArticles('PL', category, pageSize, page);sidenav.close();">
+        <span class="category-name">{{category}}</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-card class="card" *ngFor="let article of articles">
+    <mat-card-header>
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-subtitle>{{article.source.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="img-article" src={{article.urlToImage}} alt="">
+    <mat-card-content>
+      <p>
+        {{article.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="action-buttons">
+      <a mat-button color="secondary" href={{article.url}} target="_blank">
+        <mat-icon>link</mat-icon> More
+      </a>
+    </mat-card-actions>
+  </mat-card>
+  <div class="pagination">
+    <ngb-pagination (pageChange)="pageChanged($event)" [collectionSize]="totalResults" [(page)]="page"
+      [maxSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+</mat-sidenav-container>

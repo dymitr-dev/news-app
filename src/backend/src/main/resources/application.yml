@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet.context-path: /api
+
+logging.level.io.swagger.models.parameters.AbstractSerializableParameter: ERROR
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:localhost;DB_CLOSE_ON_EXIT=FALSE
+    username: admin
+    password:
+
+management.endpoints.web.exposure.include: '*'
+
+app:
+  swagger-host: localhost #:8080 Add port if you work only with Maven project
+  news-api:
+    api-key: 57edb865ed9646b4bac7c8146e274665
+    endpoint: https://newsapi.org/v2/top-headlines
